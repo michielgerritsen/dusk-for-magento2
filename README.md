@@ -56,7 +56,7 @@ class OrderProductsTest extends DuskTestCase
         return 'http://my-super-cool-project.test';
     }
 
-    public function te_stOrderProducts()
+    public function testOrderProducts()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/');
