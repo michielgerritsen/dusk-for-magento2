@@ -1,0 +1,20 @@
+{
+    "name": "michielgerritsen/dusk-for-magento2",
+    "description": "Ready to go Laravel Dusk components for your Magento 2 store to automated tests against them",
+    "require-dev": {
+        "laravel/dusk": "*"
+    },
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Michiel Gerritsen",
+            "email": "michiel@controlaltdelete.nl"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ControlAltDelete\\DuskForMagento2\\": "src"
+        }
+    }
+}
