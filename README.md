@@ -120,6 +120,7 @@ Add a product to you shopping with the optional given quantity cart. It verifies
 **Usage**
 
 ```
+$browser->visit(new AddProduct($relativeUrl, $name))->addToCart($quantity = null);
 $browser->visit(new AddProduct('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
 ```
 
@@ -154,5 +155,20 @@ This selects the moneyorder payment method and clicks the *Place order* button.
 Login on the admin panel.
 
 **Usage**
+```
+$browser->visit(new AdminLogin($frontName))->fillForm($username, $password);
+$browser->visit(new AdminLogin('my-custom-frontname'))->fillForm('my-username', 'my-password');
+```
 
-`$browser->visit(new AdminLogin('my-custom-frontname'))->fillForm('my-username', 'my-password');`
+---
+
+`Pages\ConfigurationGroup`
+
+Navigate to a configuration group. Note: The capitalization is important here. *Payment methods* will fail, while *Payment Methods* will succeed.
+
+**Usage**
+
+```
+$browser->on(new ConfigurationGroup)->open($tab', $name);
+$browser->on(new ConfigurationGroup)->open('Sales', 'Payment Methods');
+```
