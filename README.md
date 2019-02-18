@@ -43,8 +43,8 @@ Create the file `test/Browser/OrderTest.php` with this contents:
 namespace Tests\Browser;
 
 use ControlAltDelete\DuskForMagento2\DataObjects\Address;
-use ControlAltDelete\DuskForMagento2\Pages\AddProductToCart;
-use ControlAltDelete\DuskForMagento2\Pages\ShippingAddress;
+use ControlAltDelete\DuskForMagento2\Actions\AddProductToCart;
+use ControlAltDelete\DuskForMagento2\Actions\FillShippingAddress;
 use ControlAltDelete\DuskForMagento2\PaymentMethod\MoneyOrder;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
@@ -77,7 +77,7 @@ class OrderProductsTest extends DuskTestCase
                 '0031623925470' // Postcode
             );
 
-            $browser->visit(new ShippingAddress())->fillShippingAddress($address);
+            $browser->visit(new FillShippingAddress())->fillShippingAddress($address);
 
             $browser->press('Next');
 
@@ -113,7 +113,7 @@ This is mainly created as a proof of concept. It works in my environment, but th
 
 ## Components overview
 
-`Pages\AddProductToCart`
+`Actions\AddProductToCart`
 
 Add a product to you shopping with the optional given quantity cart. It verifies that the product is added to the cart.
 
@@ -128,14 +128,14 @@ When you enter a quantity it is required to have the quantity field enable on th
 
 ---
 
-`Pages\ShippingAddress`
+`Actions\FillShippingAddress`
 
 Navigate to the checkout and fill the shipping address. It is required to provide an `\ControlAltDelete\DuskForMagento2\DataObjects\Address` object.
 
 **Usage**
 
 ```
-$browser->visit(new ShippingAddress())->fillShippingAddress($address);
+$browser->visit(new FillShippingAddress())->fillShippingAddress($address);
 ```
 
 ---
@@ -150,7 +150,7 @@ This selects the moneyorder payment method and clicks the *Place order* button.
 
 ---
 
-`Pages\AdminLogin`
+`Actions\AdminLogin`
 
 Login on the admin panel.
 
@@ -162,13 +162,13 @@ $browser->visit(new AdminLogin('my-custom-frontname'))->fillForm('my-username', 
 
 ---
 
-`Pages\ConfigurationGroup`
+`Actions\NavigateToConfigurationGroup`
 
 Navigate to a configuration group. Note: The capitalization is important here. *Payment methods* will fail, while *Payment Methods* will succeed.
 
 **Usage**
 
 ```
-$browser->on(new ConfigurationGroup)->open($tab', $name);
-$browser->on(new ConfigurationGroup)->open('Sales', 'Payment Methods');
+$browser->on(new NavigateToConfigurationGroup)->open($tab', $name);
+$browser->on(new NavigateToConfigurationGroup)->open('Sales', 'Payment Methods');
 ```

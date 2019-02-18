@@ -1,6 +1,6 @@
 <?php
 
-namespace ControlAltDelete\DuskForMagento2\Pages;
+namespace ControlAltDelete\DuskForMagento2\Actions;
 
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\Page;

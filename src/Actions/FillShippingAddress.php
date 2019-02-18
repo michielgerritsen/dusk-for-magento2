@@ -1,12 +1,12 @@
 <?php
 
-namespace ControlAltDelete\DuskForMagento2\Pages;
+namespace ControlAltDelete\DuskForMagento2\Actions;
 
 use Laravel\Dusk\Browser;
 use ControlAltDelete\DuskForMagento2\DataObjects\Address;
 use Tests\Browser\Pages\Page;
 
-class ShippingAddress extends Page
+class FillShippingAddress extends Page
 {
     /**
      * Get the URL for the page.

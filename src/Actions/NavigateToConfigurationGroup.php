@@ -16,12 +16,12 @@
  *
  */
 
-namespace ControlAltDelete\DuskForMagento2\Pages;
+namespace ControlAltDelete\DuskForMagento2\Actions;
 
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\Page;
 
-class ConfigurationGroup extends Page
+class NavigateToConfigurationGroup extends Page
 {
     /**
      * Get the URL for the page.
