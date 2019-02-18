@@ -34,7 +34,10 @@ class MoneyOrder extends Page
 
     public function placeOrder(\Laravel\Dusk\Browser $browser)
     {
-        $browser->radio('payment[method]', 'checkmo');
+        // We only need to select the payment method when there is more than 1 payment method.
+        if ($browser->resolver->find('payment[method]')) {
+            $browser->radio('payment[method]', 'checkmo');
+        }
 
         $browser->press('Place Order');
 
