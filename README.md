@@ -43,7 +43,7 @@ Create the file `test/Browser/OrderTest.php` with this contents:
 namespace Tests\Browser;
 
 use ControlAltDelete\DuskForMagento2\DataObjects\Address;
-use ControlAltDelete\DuskForMagento2\Pages\AddProduct;
+use ControlAltDelete\DuskForMagento2\Pages\AddProductToCart;
 use ControlAltDelete\DuskForMagento2\Pages\ShippingAddress;
 use ControlAltDelete\DuskForMagento2\PaymentMethod\MoneyOrder;
 use Tests\DuskTestCase;
@@ -61,8 +61,8 @@ class OrderProductsTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/');
 
-            $browser->visit(new AddProduct('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
-            $browser->visit(new AddProduct('/push-it-messenger-bag.html', 'Push It Messenger Bag'))->addToCart(3);
+            $browser->visit(new AddProductToCart('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
+            $browser->visit(new AddProductToCart('/push-it-messenger-bag.html', 'Push It Messenger Bag'))->addToCart(3);
 
             $browser->visit('/checkout/');
 
@@ -113,15 +113,15 @@ This is mainly created as a proof of concept. It works in my environment, but th
 
 ## Components overview
 
-`Pages\AddProduct`
+`Pages\AddProductToCart`
 
 Add a product to you shopping with the optional given quantity cart. It verifies that the product is added to the cart.
 
 **Usage**
 
 ```
-$browser->visit(new AddProduct($relativeUrl, $name))->addToCart($quantity = null);
-$browser->visit(new AddProduct('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
+$browser->visit(new AddProductToCart($relativeUrl, $name))->addToCart($quantity = null);
+$browser->visit(new AddProductToCart('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
 ```
 
 When you enter a quantity it is required to have the quantity field enable on the product page. You can repeat this with different products to create shopping cart with differen items in them.

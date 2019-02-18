@@ -5,7 +5,7 @@ namespace ControlAltDelete\DuskForMagento2\Pages;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\Page;
 
-class AddProduct extends Page
+class AddProductToCart extends Page
 {
     /**
      * @var string
@@ -50,7 +50,7 @@ class AddProduct extends Page
 
     public function addToCart(Browser $browser, $quantity = null)
     {
-        $browser->pause(2000);
+        $browser->waitForText('Add to Cart');
 
         if ($quantity) {
             $browser->type('qty', $quantity);
@@ -58,7 +58,7 @@ class AddProduct extends Page
 
         $browser->press('Add to Cart');
 
-        $browser->waitForText('Added');
+        $browser->waitForText('You added ' . $this->name . ' to your');
         $browser->pause(2000);
 
         $browser->visit('/checkout/cart');
