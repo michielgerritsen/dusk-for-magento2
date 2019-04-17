@@ -43,7 +43,7 @@ Create the file `test/Browser/OrderTest.php` with this contents:
 namespace Tests\Browser;
 
 use ControlAltDelete\DuskForMagento2\DataObjects\Address;
-use ControlAltDelete\DuskForMagento2\Actions\AddProductToCart;
+use ControlAltDelete\DuskForMagento2\Actions\AddSimpleProductToCart;
 use ControlAltDelete\DuskForMagento2\Actions\FillShippingAddress;
 use ControlAltDelete\DuskForMagento2\PaymentMethod\MoneyOrder;
 use Tests\DuskTestCase;
@@ -61,8 +61,8 @@ class OrderProductsTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/');
 
-            $browser->visit(new AddProductToCart('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
-            $browser->visit(new AddProductToCart('/push-it-messenger-bag.html', 'Push It Messenger Bag'))->addToCart(3);
+            $browser->visit(new AddSimpleProductToCart('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
+            $browser->visit(new AddSimpleProductToCart('/push-it-messenger-bag.html', 'Push It Messenger Bag'))->addToCart(3);
 
             $browser->visit('/checkout/');
 
@@ -113,18 +113,38 @@ This is mainly created as a proof of concept. It works in my environment, but th
 
 ## Components overview
 
-`Actions\AddProductToCart`
+`Actions\AddSimpleProductToCart`
 
-Add a product to you shopping with the optional given quantity cart. It verifies that the product is added to the cart.
+Add a simple product to you shopping cart with the optional given quantity. It verifies that the product is added to the cart.
 
 **Usage**
 
 ```
-$browser->visit(new AddProductToCart($relativeUrl, $name))->addToCart($quantity = null);
-$browser->visit(new AddProductToCart('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
+$browser->visit(new AddSimpleProductToCart($relativeUrl, $name))->addToCart($quantity = null);
+$browser->visit(new AddSimpleProductToCart('/fusion-backpack.html', 'Fusion Backpack'))->addToCart(2);
 ```
 
 When you enter a quantity it is required to have the quantity field enable on the product page. You can repeat this with different products to create shopping cart with differen items in them.
+
+---
+
+`Actions\AddBundleProductToCart`
+
+Add a bundle product to you shopping cart with the optional given quantity. It verifies that the product is added to the cart.
+
+**Usage**
+
+```
+$optionList = new BundleOptionList([
+    new BundleOption(5, 9),
+    new BundleOption(6, 13),
+]);
+
+$browser->visit(new AddBundleProductToCart($relativeUrl, $name))->addToCart($optionList, $quantity = null);
+$browser->visit(new AddBundleProductToCart('/fusion-backpack.html', 'Fusion Backpack'))->addToCart($optionList, 2);
+```
+
+The IDs refer to the ID of the dropdown, and the ID of the option in the dropdown.
 
 ---
 

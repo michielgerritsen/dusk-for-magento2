@@ -5,7 +5,7 @@ namespace ControlAltDelete\DuskForMagento2\Actions;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\Page;
 
-class AddProductToCart extends Page
+class AddSimpleProductToCart extends Page
 {
     /**
      * @var string
