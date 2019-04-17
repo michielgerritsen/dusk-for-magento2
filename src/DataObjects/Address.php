@@ -48,6 +48,11 @@ class Address
     /**
      * @var string
      */
+    private $region_id;
+
+    /**
+     * @var string
+     */
     private $postcode;
 
     /**
@@ -66,6 +71,7 @@ class Address
         $lastname,
         array $street,
         $city,
+        $region_id,
         $postcode,
         $country_id,
         $telephone
@@ -75,6 +81,7 @@ class Address
         $this->lastname = $lastname;
         $this->street = $street;
         $this->city = $city;
+        $this->region_id = $region_id;
         $this->postcode = $postcode;
         $this->country_id = $country_id;
         $this->telephone = $telephone;
@@ -118,6 +125,14 @@ class Address
     public function getCity(): string
     {
         return $this->city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegionId(): ?string
+    {
+        return $this->region_id;
     }
 
     /**

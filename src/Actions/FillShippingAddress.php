@@ -40,6 +40,10 @@ class FillShippingAddress extends Page
             $browser->type('street[' . $index . ']', $value);
         }
 
+        if ($address->getRegionId()) {
+            $browser->select('region_id', $address->getRegionId());
+        }
+
         $browser->type('city', $address->getCity());
         $browser->type('postcode', $address->getPostcode());
         $browser->select('country_id', $address->getCountryId());
