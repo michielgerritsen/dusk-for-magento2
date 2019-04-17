@@ -2,6 +2,8 @@
 
 namespace ControlAltDelete\DuskForMagento2\Actions;
 
+use ControlAltDelete\DuskForMagento2\Exceptions\OutOfStockException;
+use Illuminate\Support\Str;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\Page;
 
@@ -50,6 +52,10 @@ class AddSimpleProductToCart extends Page
 
     public function addToCart(Browser $browser, $quantity = null)
     {
+        if (Str::contains($browser->resolver->findOrFail('')->getText(), 'OUT OF STOCK')) {
+            throw new OutOfStockException;
+        }
+
         $browser->waitForText('Add to Cart');
 
         if ($quantity) {

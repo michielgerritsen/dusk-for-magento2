@@ -20,6 +20,8 @@ namespace ControlAltDelete\DuskForMagento2\Actions;
 
 use ControlAltDelete\DuskForMagento2\DataObjects\BundleOption;
 use ControlAltDelete\DuskForMagento2\DataObjects\BundleOptionList;
+use ControlAltDelete\DuskForMagento2\Exceptions\OutOfStockException;
+use Illuminate\Support\Str;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\Page;
 
@@ -55,6 +57,10 @@ class AddBundleProductToCart extends Page
 
     public function addToCart(Browser $browser, BundleOptionList $optionList, $quantity = null)
     {
+        if (Str::contains($browser->resolver->findOrFail('')->getText(), 'OUT OF STOCK')) {
+            throw new OutOfStockException;
+        }
+
         $browser->pause(2000);
 
         $browser->click('#bundle-slide');
